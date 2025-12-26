@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import { toast } from "react-toastify";
+import {UserHandleState} from "./typesact"
 
 
 
-
-export const userHandle = create((set)=>({
+export const userHandle = create<UserHandleState>((set)=>({
     signOrLog : false,
     loading: false,
     showPass: true,
@@ -13,6 +13,18 @@ export const userHandle = create((set)=>({
     email: "",
     password: "",
     user: {},
+    phone: "",
+    address: "",
+    about: "",
+    service: "",
+    profilePic: "",
+    coverPic: "",
+    setPhone: (a: string)=>set({phone: a}),
+    setAddress: (a: string)=>set({address: a}),
+    setAbout: (a: string)=>set({about: a}),
+    setService: (a: string)=>set({service: a}),
+    setProfilePic: (a: string)=>set({profilePic: a}),
+    setCoverPic: (a: string)=>set({coverPic: a}),
     setUserOrEmail: (a: boolean)=>set({userOrEmail: a}),
     setShowPass: (a: boolean)=>set({showPass: a}),
     setSignOrLog: (a: boolean)=>set({signOrLog: a}),

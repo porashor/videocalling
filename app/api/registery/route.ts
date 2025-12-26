@@ -13,10 +13,6 @@ interface MyJwtPayload extends JwtPayload { _id: string; }
 
 export async function GET() {
     const headersCookie = cookies()
-    const cok = await headersCookie
-    console.log('cok',cok)
-    const coking = cok.get("auth_token")
-    console.log(coking)
     try {
     const token = (await headersCookie).get("auth_token")?.value
     await client();
