@@ -1,13 +1,13 @@
 import bcrypt from "bcryptjs";
 import client from "../lib/mongodb";
 import UserModel from "../schema/userSchema";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 const secret = process.env.JWT_SECRET as string;
 export const runtime = "nodejs";
 
-
+interface MyJwtPayload extends JwtPayload { _id: string; }
 
 
 
@@ -24,7 +24,8 @@ export async function GET() {
     if(!token){
         return NextResponse.json({ user: null , AthTkn : token });
     }
-    const decodedToken = jwt.verify(token as string, secret);
+    const decodedToken = jwt.verify(token as string, secret) as MyJwtPayload;
+    console.log("Decoded Token:", decodedToken);
     const user = await UserModel.findOne({ _id: decodedToken._id });
     return NextResponse.json({ user });
   } catch (err) {
