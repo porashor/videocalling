@@ -12,19 +12,19 @@ export const userHandle = create<UserHandleState>((set)=>({
     name: "",
     email: "",
     password: "",
-    user: {},
+    user: null,
     phone: "",
     address: "",
     about: "",
     service: "",
-    profilePic: "",
-    coverPic: "",
+    profilePic: null as File | null,
+    coverPic: null as File | null,
     setPhone: (a: string)=>set({phone: a}),
     setAddress: (a: string)=>set({address: a}),
     setAbout: (a: string)=>set({about: a}),
     setService: (a: string)=>set({service: a}),
-    setProfilePic: (a: string)=>set({profilePic: a}),
-    setCoverPic: (a: string)=>set({coverPic: a}),
+    setProfilePic: (a: File)=>set({profilePic: a}),
+    setCoverPic: (a: File)=>set({coverPic: a}),
     setUserOrEmail: (a: boolean)=>set({userOrEmail: a}),
     setShowPass: (a: boolean)=>set({showPass: a}),
     setSignOrLog: (a: boolean)=>set({signOrLog: a}),
@@ -111,18 +111,18 @@ export const userHandle = create<UserHandleState>((set)=>({
             console.log(err)
         }
     },
-    updateProfile: async(email: string, phone: string, address: string, about: string, service: string, profilePic, coverPic)=> {
+    updateProfile: async(e, phone: string, address: string, about: string, service: string, profilePic: File, coverPic: File)=> {
+        e.preventDefault()
         set({loading: true})
+        const formData = new FormData();
+        formData.append("phone", phone);
+        formData.append("address", address);
+        formData.append("about", about);
+        formData.append("service", service);
+        formData.append("profilePic", profilePic);
+        formData.append("coverPic", coverPic);
         try{
-            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/registery", {method: "PUT", body: JSON.stringify({
-                email,
-                phone,
-                address,
-                about,
-                service,
-                profilePic,
-                coverPic
-            })})
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/registery", {method: "PUT", body: formData})
             const data = await res.json()
             console.log(data)
             toast.success(data.data.message)

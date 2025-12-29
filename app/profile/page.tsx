@@ -1,20 +1,28 @@
-'use client'
 import ProfileData from "@/component/ProfileData"
 import photo from "@/public/main.png"
 import Image from "next/image"
-import { useEffect } from "react"
-import { userHandle } from "@/function/UserZust"
+import { cookies } from "next/headers"
 
 
 
 
 
-const page =  () => {
-  const {user, getUser} = userHandle()
-
-  useEffect(()=>{
-    getUser()
-  },[])
+const page = async () => {
+  const cookieStore = cookies()
+  let user = null
+  const token = (await cookieStore).get("auth_token")?.value
+  try{
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/registery", { 
+      method: "GET", 
+      headers: { 
+        Cookie: token ? `auth_token=${token}` : "",
+      }, 
+      cache: "no-store", });
+    const data = await res.json()
+    user = data.user
+  }catch(err){
+    console.log(err)
+  }
   console.log(user)
   return (
     <div className="bg-cyan-700 min-h-screen p-5 ">

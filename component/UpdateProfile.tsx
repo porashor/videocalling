@@ -2,10 +2,10 @@
 import {userHandle} from "@/function/UserZust"
 import React from "react"
 const UpdateProfile = () => {
-    const {phone, address, about, service, profilePic, coverPic, setPhone, setAddress, setAbout, setService, setProfilePic, setCoverPic} = userHandle()
+    const {phone, address, about, service, profilePic, coverPic, setPhone, setAddress, setAbout, setService, setProfilePic, setCoverPic, updateProfile} = userHandle()
   return (
     <div className='w-full h-fit'>
-      <form className='text-xl'>
+      <form className='text-xl' onSubmit={(e)=>updateProfile(e, phone, address, about, service, profilePic as File, coverPic as File)}>
         <label htmlFor="phone" className='grid grid-cols-1 md:grid-cols-2 my-2'>
             <span className='hidden md:block'>Phone :</span>
             <input type="text" value={phone} onChange={(e)=>setPhone(e.target.value)} id='phone' className='bg-slate-200 text-black py-1 px-3 rounded-lg outline-0 focus:ring-2 ring-cyan-400' placeholder='phone'/>
@@ -24,11 +24,11 @@ const UpdateProfile = () => {
         </label>
         <label htmlFor="profilePic" className='grid grid-cols-1 md:grid-cols-2 my-2'>
             <span className=''>Profile pic :</span>
-            <input onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setProfilePic(e.target.files[0])} type="file" id='profilePic' className='' placeholder='Profile pic'/>
+            <input onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{if(e.target.files?.[0]) setProfilePic(e.target.files[0])}} type="file" id='profilePic' className='' placeholder='Profile pic'/>
         </label>
         <label htmlFor="coverPic" className='grid grid-cols-1 md:grid-cols-2 my-2'>
             <span className=''>Cover pic :</span>
-            <input onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setCoverPic(e.target.files[0])} type="file" id='coverPic' className='' placeholder='Cover pic'/>
+            <input onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{if(e.target.files?.[0]) setCoverPic(e.target.files[0])}} type="file" id='coverPic' className='' placeholder='Cover pic'/>
         </label>
         <button type='submit' className='py-2 bg-cyan-600 text-white uppercase font-bold rounded-xl hover:bg-cyan-400 transition-all duration-200 mt-3 w-full'>Update</button>
       </form>

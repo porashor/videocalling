@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react"
 import UpdateProfile from "./UpdateProfile"
+import ProfileView from "./ProfileView"
 
 const ProfileData = () => {
   const [open, setOpen] = useState(1)
@@ -16,7 +17,7 @@ const ProfileData = () => {
         </ul>
         <div>
           {open == 1 && <div className="py-5"><UpdateProfile /></div>}
-          {open == 2 && <div className="py-5">Profile view section</div>}
+          {open == 2 && <div className="py-5"><ProfileView /></div>}
           {open == 3 && <div className="py-5">Chatting section</div>}
           {open == 4 && <div className="py-5">Find user section</div>}
         </div>

@@ -1,3 +1,19 @@
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  about?: string;
+  service?: string;
+  profilePic?: string;
+  coverPic?: string;
+}
+
+
+
+
+
 export interface UserHandleState {
   // state values
   signOrLog: boolean;
@@ -7,21 +23,21 @@ export interface UserHandleState {
   name: string;
   email: string;
   password: string;
-  user: Record<string | number, any>; // or a specific User type if you have one
+  user: User | null; // or a specific User type if you have one
   phone: string;
   address: string;
   about: string;
   service: string;
-  profilePic: string;
-  coverPic: string;
+  profilePic: File | null;
+  coverPic: File | null;
 
   // setters
   setPhone: (a: string) => void;
   setAddress: (a: string) => void;
   setAbout: (a: string) => void;
   setService: (a: string) => void;
-  setProfilePic: (a: string) => void;
-  setCoverPic: (a: string) => void;
+  setProfilePic: (a: File) => void;
+  setCoverPic: (a: File) => void;
   setUserOrEmail: (a: boolean) => void;
   setShowPass: (a: boolean) => void;
   setSignOrLog: (a: boolean) => void;
@@ -48,12 +64,12 @@ export interface UserHandleState {
   getUser: () => Promise<void>;
 
   updateProfile: (
-    email: string,
+    e: React.FormEvent<HTMLFormElement>,
     phone: string,
     address: string,
     about: string,
     service: string,
-    profilePic: string,
-    coverPic: string
+    profilePic: File,
+    coverPic: File,
   ) => Promise<void>;
 }
