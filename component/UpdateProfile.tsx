@@ -5,7 +5,7 @@ import CardContainer from "./CardContainer"
 const UpdateProfile = () => {
     const {phone, address, about, service, profilePic, coverPic, setPhone, setAddress, setAbout, setService, setProfilePic, setCoverPic, updateProfile} = userHandle()
   return (
-    <CardContainer >
+    <CardContainer className="">
       <form className='text-xl' onSubmit={(e)=>updateProfile(e, phone, address, about, service, profilePic as File, coverPic as File)}>
         <label htmlFor="phone" className='grid grid-cols-1 md:grid-cols-2 my-2'>
             <span className='hidden md:block'>Phone :</span>
