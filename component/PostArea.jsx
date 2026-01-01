@@ -15,7 +15,7 @@ const PostArea = () => {
     <CardContainer className="space-y-5">
         <div className="flex items-center gap-5">
             <div className="w-10 aspect-square rounded-full bg-slate-600 relative">
-                <Image src={user?.profilePic ? user.profilePic : ""} width={100} height={100} alt="cover photo" className="w-full h-full object-cover rounded-full" />
+                {user?.profilePic && <Image src={user?.profilePic} width={100} height={100} alt="cover photo" className="w-full h-full object-cover rounded-full" />}
             </div>
             <input value={post} type="text" onChange={(e) => setPost(e.target.value)} placeholder="What's on your mind?" className='bg-[#3B3D3E] p-2 rounded-2xl w-full outline-0' />
         </div>
