@@ -9,7 +9,7 @@ const WhoPost = ({post}) => {
                 const user = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/registery/${post}`)
                 const data = await user.json()
                 setUser(data)
-                console.log(data.posts[0])
+                console.log(data)
             } catch (error) {
                 console.log(error)
             }
