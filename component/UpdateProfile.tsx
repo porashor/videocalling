@@ -1,10 +1,11 @@
 'use client'
 import {userHandle} from "@/function/UserZust"
 import React from "react"
+import CardContainer from "./CardContainer"
 const UpdateProfile = () => {
     const {phone, address, about, service, profilePic, coverPic, setPhone, setAddress, setAbout, setService, setProfilePic, setCoverPic, updateProfile} = userHandle()
   return (
-    <div className='w-full h-fit'>
+    <CardContainer >
       <form className='text-xl' onSubmit={(e)=>updateProfile(e, phone, address, about, service, profilePic as File, coverPic as File)}>
         <label htmlFor="phone" className='grid grid-cols-1 md:grid-cols-2 my-2'>
             <span className='hidden md:block'>Phone :</span>
@@ -30,9 +31,9 @@ const UpdateProfile = () => {
             <span className=''>Cover pic :</span>
             <input onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{if(e.target.files?.[0]) setCoverPic(e.target.files[0])}} type="file" id='coverPic' className='' placeholder='Cover pic'/>
         </label>
-        <button type='submit' className='py-2 bg-cyan-600 text-white uppercase font-bold rounded-xl hover:bg-cyan-400 transition-all duration-200 mt-3 w-full'>Update</button>
+        <button type='submit' className='py-2 bg-[#3B3D3E] text-white uppercase font-bold rounded-xl hover:bg-[#494949] transition-all duration-200 mt-3 w-full'>Update</button>
       </form>
-    </div>
+    </CardContainer>
   )
 }
 
