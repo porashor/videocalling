@@ -15,7 +15,7 @@ const ShowPost = () => {
   return (
     <div className='space-y-5 py-5'>
       {reversePosts?.map((post) => (
-        <CardContainer key={post._id}>
+        <CardContainer key={post._id} className=''>
             <div>
                 <p>{post.postdata}</p>
                 <p>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
