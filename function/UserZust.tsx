@@ -89,10 +89,9 @@ export const userHandle = create<UserHandleState>((set)=>({
     },
     LogOut: async()=> {
         try{
-            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/logout", {method: "DELETE"})
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/registery", {method: "DELETE"})
             const data = await res.json()
-            console.log(data)
-            toast.success(data.data.message)
+            toast.success(data.message)
             if(!data.success){
                 window.location.href = "/user"
             }

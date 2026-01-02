@@ -8,6 +8,9 @@ import uploadPhoto from "../lib/PhotoUp";
 const secret = process.env.JWT_SECRET as string;
 export const runtime = "nodejs";
 
+
+
+
 interface MyJwtPayload extends JwtPayload { _id: string; }
 
 
@@ -17,7 +20,6 @@ export async function GET() {
     try {
     const token = (await headersCookie).get("auth_token")?.value
     await client();
-    console.log("Token from cookies:", token);
     if(!token){
         return NextResponse.json({ user: null , AthTkn : token });
     }
@@ -169,13 +171,9 @@ export async function PUT(req: Request) {
 
 export async function DELETE() {
   try {
-    const res = NextResponse.json({
-      status: 200,
-      message: "Sign out successfully",
-      success: false,
-    });
-    res.cookies.delete("auth_token");
-    return res;
+    const res = await cookies()
+    res.delete("auth_token")
+    return Response.json({ status: 200,  message: "logout successfully done" });
   } catch (error) {
     console.log(error);
   }

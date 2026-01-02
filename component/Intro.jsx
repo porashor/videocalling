@@ -10,7 +10,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { LuClock10 } from "react-icons/lu";
 import { MdOutlinePhoneIphone } from "react-icons/md";
 const Intro = () => {
-    const {user, getUser} = userHandle()
+    const {user, getUser, LogOut} = userHandle()
     useEffect(() => {
         getUser()
     }, [])
@@ -45,6 +45,9 @@ const Intro = () => {
         <div className='flex gap-5 items-center'>
             <h1 className='text-xl font-bold text-[#aaa]'><LuClock10 /> </h1>
             <p>Joined on: {user?.cart ? user?.cart : "None"}</p>
+        </div>
+        <div>
+            <Button onClick={()=>LogOut()}>Sign Out</Button>
         </div>
     </CardContainer>
   )
