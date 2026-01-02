@@ -26,7 +26,7 @@ const ShowPost = () => {
       {reversePosts?.map((post) => (
         <CardContainer key={post._id}>
           {/* load who post */}
-          <WhoPost post={post.user} />
+          {/* <WhoPost post={post.user} /> */}
             <div className='flex items-center justify-between'>
                 <p>{post.postdata}</p>
                 <p>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
